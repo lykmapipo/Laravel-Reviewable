@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare(strict_types=1);
+// declare(strict_types=1);
 
 /*
  * This file is part of Laravel Reviewable.
@@ -36,19 +36,19 @@ class Review extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function reviewable(): MorphTo
+    public function reviewable()
     {
         return $this->morphTo();
     }
 
-    public function author(): MorphTo
+    public function author()
     {
         return $this->morphTo('author');
     }
 
-    public function createReview(Model $reviewable, $data, Model $author): bool
+    public function createReview($reviewable, $data, $author)
     {
-        $review = new static();
+        $review = new Review();
         $review->fill(array_merge($data, [
             'author_id'   => $author->id,
             'author_type' => get_class($author),
@@ -57,13 +57,13 @@ class Review extends Model
         return (bool) $reviewable->reviews()->save($review);
     }
 
-    public function updateReview($id, $data): bool
+    public function updateReview($id, $data)
     {
-        return (bool) static::find($id)->update($data);
+        return (bool) Review::find($id)->update($data);
     }
 
-    public function deleteReview($id): bool
+    public function deleteReview($id)
     {
-        return (bool) static::find($id)->delete();
+        return (bool) Review::find($id)->delete();
     }
 }

@@ -29,7 +29,7 @@ class ReviewableServiceProvider extends AbstractServiceProvider
     /**
      * Bootstrap the application services.
      */
-    public function boot(): void
+    public function boot()
     {
         $this->publishMigrations();
 
@@ -39,7 +39,7 @@ class ReviewableServiceProvider extends AbstractServiceProvider
     /**
      * Register the application services.
      */
-    public function register(): void
+    public function register()
     {
         parent::register();
 
@@ -51,7 +51,7 @@ class ReviewableServiceProvider extends AbstractServiceProvider
      *
      * @return string
      */
-    public function getPackageName(): string
+    public function getPackageName()
     {
         return 'reviewable';
     }
