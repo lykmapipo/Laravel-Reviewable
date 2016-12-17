@@ -22,18 +22,23 @@ declare(strict_types=1);
 
 namespace BrianFaust\Reviewable;
 
-use BrianFaust\ServiceProvider\AbstractServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class ReviewableServiceProvider extends AbstractServiceProvider
+class ReviewableServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
      */
     public function boot()
     {
-        $this->publishMigrations();
+        $this->publishes([
+            realpath(__DIR__.'/../migrations') => database_path('migrations')
+        ], 'migrations');
 
-        $this->publishConfig();
+        // Publish config files
+        $this->publishes([
+            __DIR__.'/../config.php' => config_path('reviewable.php'),
+        ]);
     }
 
     /**
@@ -41,18 +46,18 @@ class ReviewableServiceProvider extends AbstractServiceProvider
      */
     public function register()
     {
-        parent::register();
-
         $this->mergeConfig();
     }
 
     /**
-     * Get the default package name.
+     * Merges user's and entrust's configs.
      *
-     * @return string
+     * @return void
      */
-    public function getPackageName()
+    private function mergeConfig()
     {
-        return 'reviewable';
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/config.php', 'reviewable'
+        );
     }
 }
