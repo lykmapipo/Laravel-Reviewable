@@ -11,7 +11,8 @@
     "require": {
         "php": "^7.1",
         "faustbrian/laravel-service-provider": "^1.0",
-        "illuminate/database": "5.3.*"
+        "illuminate/database": "5.3.*",
+        "alsofronie/eloquent-uuid": "dev-master"
     },
     "require-dev": {
         "graham-campbell/testbench": "^3.2",

@@ -44,8 +44,7 @@ $post = Post::first();
 
 $review = $post->createReview([
     'title' => 'Some title',
-    'body' => 'Some body',
-    'rating' => 5,
+    'body' => 'Some body'
 ], $user);
 
 dd($review);
@@ -55,8 +54,7 @@ dd($review);
 ``` php
 $review = $post->updateReview(1, [
     'title' => 'new title',
-    'body' => 'new body',
-    'rating' => 3,
+    'body' => 'new body'
 ]);
 ```
 

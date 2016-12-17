@@ -47,11 +47,6 @@ trait HasReviews
         return $this->getReviewModel()->deleteReview($id);
     }
 
-    public function getRating(): float
-    {
-        return round($this->reviews()->avg('rating'));
-    }
-
     protected function getReviewModel(): Model
     {
         $model = config('reviewable.models.review');

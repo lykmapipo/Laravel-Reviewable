@@ -24,9 +24,16 @@ namespace BrianFaust\Reviewable;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Alsofronie\Uuid\UuidModelTrait;
+
 
 class Review extends Model
 {
+    /**
+     * Use Uuuid 32 as primary key
+     */
+    use UuidModelTrait;
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function reviewable(): MorphTo

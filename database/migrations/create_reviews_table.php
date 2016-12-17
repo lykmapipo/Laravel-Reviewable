@@ -17,12 +17,14 @@ class CreateReviewsTable extends Migration
     public function up()
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title');
-            $table->text('body');
-            $table->integer('rating');
-            $table->morphs('reviewable');
-            $table->morphs('author');
+            $table->uuid('id');
+            $table->string('title')->nullable();
+            $table->text('body')->nullable();
+            $table->uuid('reviewable_id')->index();
+            $table->string('reviewable_type', 255)->index();
+            $table->uuid('author_id')->index();
+            $table->string('author_type', 255)->index();
+            $table->primary('id');
             $table->timestamps();
         });
     }
