@@ -51,7 +51,7 @@ trait Reviewable
             $review->user_id = $userId;
             $review->title = $title;
             $review->body = $body;
-            $this->ratings()->save($review);
+            $this->reviews()->save($review);
         }
 
         else{
