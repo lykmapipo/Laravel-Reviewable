@@ -25,7 +25,7 @@ class CreateReviewsTable extends Migration
             $table->uuid('user_id')->index();
             $table->primary('id');
             $table->timestamps();
-            $table->foreign('author_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
