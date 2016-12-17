@@ -37,7 +37,7 @@ class ReviewableServiceProvider extends ServiceProvider
 
         // Publish config files
         $this->publishes([
-            __DIR__.'/../config.php' => config_path('reviewable.php'),
+            __DIR__.'/../config.php' => config_path('reviewable'),
         ]);
     }
 
@@ -57,7 +57,7 @@ class ReviewableServiceProvider extends ServiceProvider
     private function mergeConfig()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', 'reviewable'
+            __DIR__.'/../config/reviewable.php', 'reviewable'
         );
     }
 }
