@@ -25,7 +25,7 @@ namespace BrianFaust\Reviewable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-trait Reviewa
+trait Reviewable
 {
     public function reviews()
     {
