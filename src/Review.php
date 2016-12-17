@@ -22,6 +22,7 @@
 
 namespace BrianFaust\Reviewable;
 
+use Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Alsofronie\Uuid\UuidModelTrait;
@@ -36,34 +37,25 @@ class Review extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public $fillable = ['title', 'body'];
+
     public function reviewable()
     {
         return $this->morphTo();
     }
 
-    public function author()
+    /**
+     * Review belongs to a user.
+     *
+     * @return User
+     */
+    public function user()
     {
-        return $this->morphTo('author');
-    }
-
-    public function createReview($reviewable, $data, $author)
-    {
-        $review = new Review();
-        $review->fill(array_merge($data, [
-            'author_id'   => $author->id,
-            'author_type' => get_class($author),
-        ]));
-
-        return (bool) $reviewable->reviews()->save($review);
-    }
-
-    public function updateReview($id, $data)
-    {
-        return (bool) Review::find($id)->update($data);
-    }
-
-    public function deleteReview($id)
-    {
-        return (bool) Review::find($id)->delete();
+        return $this->belongsTo(Config::get('auth.model'));
     }
 }

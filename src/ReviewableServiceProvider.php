@@ -34,11 +34,6 @@ class ReviewableServiceProvider extends ServiceProvider
         $this->publishes([
             realpath(__DIR__.'/../migrations') => database_path('migrations')
         ], 'migrations');
-
-        // Publish config files
-        $this->publishes([
-            __DIR__.'/../config.php' => config_path('reviewable'),
-        ]);
     }
 
     /**
@@ -46,18 +41,5 @@ class ReviewableServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfig();
-    }
-
-    /**
-     * Merges user's and entrust's configs.
-     *
-     * @return void
-     */
-    private function mergeConfig()
-    {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/reviewable.php', 'reviewable'
-        );
     }
 }
